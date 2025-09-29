@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>תנאי שימוש - אפליקציית בחינת הלשכה</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            margin-top: 40px;
+            margin-bottom: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .app-icon::after {
+            content: '⚖️';
+            font-size: 40px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .last-updated {
+            background: #ecf0f1;
+            padding: 10px 20px;
+            border-radius: 25px;
+            color: #5a6c7d;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .content {
+            padding: 0 30px;
+        }
+
+        .intro {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+            line-height: 1.8;
+            box-shadow: 0 8px 25px rgba(245, 87, 108, 0.2);
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h2::before {
+            content: counter(section);
+            counter-increment: section;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8em;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .content {
+            counter-reset: section;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            padding-right: 20px;
+            position: relative;
+        }
+
+        h3::before {
+            content: '▶';
+            color: #667eea;
+            margin-left: 10px;
+            font-size: 0.8em;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+            padding-right: 10px;
+        }
+
+        .definition-box {
+            background: #f8f9fa;
+            border-right: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            border: none;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(255, 154, 158, 0.3);
+        }
+
+        .warning-box::before {
+            content: '⚠️ ';
+            font-size: 1.2em;
+            margin-left: 5px;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .contact-section h2 {
+            color: white;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .contact-section h2::before {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .email-link {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            border-bottom: 2px solid transparent;
+            transition: border-bottom 0.3s ease;
+        }
+
+        .email-link:hover {
+            border-bottom: 2px solid #ffd700;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 25px;
+            background: #2c3e50;
+            color: white;
+            border-radius: 0 0 15px 15px;
+            margin-left: -30px;
+            margin-right: -30px;
+            margin-bottom: -20px;
+        }
+
+        .back-to-app {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 20px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .back-to-app:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+                border-radius: 10px;
+            }
+
+            .content {
+                padding: 0 15px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            .contact-section,
+            .footer {
+                margin-left: -15px;
+                margin-right: -15px;
+                margin-bottom: -15px;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection styling */
+        ::selection {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Scrollbar styling for webkit browsers */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #5a6fd8, #6a42a0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="app-icon"></div>
+            <h1>תנאי שימוש</h1>
+            <div class="subtitle">אפליקציית "בחינת הלשכה"</div>
+            <div class="last-updated">מעודכן לתאריך: 24 במאי 2024</div>
+        </div>
+
+        <div class="content">
+            <div class="intro">
+                להלן תנאי השימוש (להלן: "התנאים") של אפליקציית "בחינת הלשכה" (להלן: "האפליקציה"). הורדה, התקנה או שימוש באפליקציה בכל דרך שהיא, לרבות הרשמה ויצירת חשבון, מהווים הסכמה מלאה ובלתי מסויגת מצדך לכל התנאים המפורטים להלן. אם אינך מסכים/ה לאחד או יותר מתנאי השימוש, אינך רשאי/ת להוריד את האפליקציה, ליצור חשבון או לעשות בה כל שימוש, ועליך להסירה ממכשירך לאלתר.
+            </div>
+
+            <h2>כללי</h2>
+            
+            <h3>הגדרות</h3>
+            <div class="definition-box">
+                <p><strong>"האפליקציה"</strong> – יישום אינטראקטיבי המיועד לתרגול שאלות רב-ברירה והכנה לבחינות בדינים משפטיים, לרבות דיני חוזים, דיני נזיקין, סדר דין אזרחי ונושאים נוספים. האפליקציה משמשת כאמצעי עזר נוסף לתרגול והכנה למבחני לשכת עורכי הדין, אך אינה מתיימרת להוות תחליף לקורס הכנה מלא, לייעוץ לימודי מקצועי או לייעוץ משפטי מוסמך.</p>
+                
+                <p><strong>"המשתמש/ת"</strong> או <strong>"את/ה"</strong> – כל אדם או ישות משפטית המוריד/ה, מתקין/ה, נרשם/ת או משתמש/ת באפליקציה בכל דרך שהיא.</p>
+                
+                <p><strong>"אני"</strong> או <strong>"המפתח"</strong> – מפתח האפליקציה והאחראי עליה.</p>
+                
+                <p><strong>"מנוי"</strong> – סטטוס משתמש באפליקציה לאחר רכישת מנוי תקופתי (חודשי) מתחדש, המקנה גישה לתכונות ותכנים מורחבים, כפי שמפורט באפליקציה ובסעיף 3 להלן.</p>
+                
+                <p><strong>"שירותי צד שלישי"</strong> – שירותים או טכנולוגיות המסופקים על ידי גורמים חיצוניים ומשולבים באפליקציה, כדוגמת שירותי אירוח ובסיסי נתונים (כגון Supabase), שירותי ניתוח נתונים (Analytics) וכדומה.</p>
+            </div>
+
+            <h3>קבלת התנאים</h3>
+            <p>עם הורדת האפליקציה, התקנתה, הרשמה ו/או השימוש בה, את/ה מאשר/ת כי קראת בעיון את כל תנאי שימוש אלו, הבנת את תוכנם, והנך מסכים/ה להם באופן מלא ומוחלט. אני שומר לעצמי את הזכות לעדכן או לשנות את התנאים מעת לעת, לפי שיקול דעתי הבלעדי. הנוסח המחייב של התנאים יהיה זה המפורסם באפליקציה במועד השימוש. המשך שימוש באפליקציה לאחר פרסום שינוי בתנאים יהווה הסכמה מצדך לתנאים המעודכנים.</p>
+
+            <h3>התאמה להנחיות חנות האפליקציות (App Store / Google Play)</h3>
+            <p>השימוש באפליקציה והורדתה כפופים גם לתנאי השימוש ולכללי המדיניות של חנות האפליקציות הרלוונטית (Apple App Store או Google Play Store). במקרה של סתירה בין תנאים אלו לבין תנאי החנות, יגברו תנאי החנות בכל הנוגע לסוגיות הקשורות ישירות למדיניות החנות (כגון רכישה, חיובים והחזרים).</p>
+
+            <h2>תוכן האפליקציה ותכונותיה</h2>
+            
+            <h3>תוכן ולימוד</h3>
+            <p>האפליקציה מציעה תרגול אינטראקטיבי של שאלות רב-ברירה לקראת בחינות הלשכה. התוכן מחולק לשני תחומים עיקריים: "דין מהותי" ו"דין דיוני", הכוללים נושאים משפטיים מגוונים.</p>
+            
+            <p><strong>מבנה התרגול:</strong> כל תחום מחולק למספר רמות. בכל רמה ישנם מספר שאלונים ומבחן מסכם.</p>
+            
+            <p><strong>משוב והסברים:</strong> בסיום כל שאלון (למעט מבחנים מסכמים), המשתמש מקבל ציון באחוזים וכן יכול לצפות בהסבר מפורט לכל שאלה.</p>
+            
+            <p><strong>מעקב התקדמות:</strong> האפליקציה כוללת מערכת למעקב אחר התקדמות. השלמת שאלון או מבחן בציון של 100% תסומן בסימון 'V', וכך גם השלמת רמה שלמה במלואה.</p>
+
+            <h3>גרסה חינמית</h3>
+            <p>האפליקציה מציעה גישה מוגבלת לתכנים ללא תשלום. הגבלות אלו כוללות גישה לרמה הראשונה בלבד בדין המהותי ובדין הדיוני, הכוללות מספר מוגבל של שאלונים ומבחנים לדוגמה, כפי שמפורט באפליקציה. תנאי הגרסה החינמית עשויים להשתנות מעת לעת לפי שיקול דעת המפתח.</p>
+
+            <h3>מנויים בתשלום</h3>
+            <p>רכישת מנוי מקנה גישה מלאה ובלתי מוגבלת לכל התכנים, השאלונים, המבחנים והרמות בכל הדינים הזמינים באפליקציה, למשך תקופת המנוי.</p>
+
+            <h2>רכישת מנוי והתחייבות תשלום</h2>
+            
+            <h3>מחיר ותנאי המנוי</h3>
+            <p>מחיר המנוי התקופתי (חודשי) ותקופת המנוי יצוינו במסכי הרכישה בתוך האפליקציה. התשלום עבור המנוי מבוצע דרך מנגנון הרכישה הפנימי של חנות האפליקציות (In-App Purchase) בלבד. המנוי הינו מתחדש אוטומטית, אלא אם בוטל על ידך לפני מועד החידוש הבא.</p>
+
+            <h3>תהליך החיוב והתשלום</h3>
+            <p>כל החיובים והעסקאות מתבצעים באופן מאובטח דרך חשבון המשתמש שלך בחנות האפליקציות (Apple ID / חשבון Google). המפתח אינו שומר פרטי תשלום של משתמשים.</p>
+
+            <h3>שינויים במחיר המנוי</h3>
+            <p>אני שומר לעצמי את הזכות לשנות את דמי המנוי מעת לעת. במקרה של שינוי במחיר מנוי מתחדש קיים, תינתן לך הודעה מוקדמת בהתאם למדיניות חנות האפליקציות.</p>
+
+            <div class="warning-box">
+                <h3>ביטול המנוי</h3>
+                <p>את/ה אחראי/ת באופן בלעדי לביטול המנוי המתחדש. ניתן לבטל את המנוי בכל עת דרך הגדרות החשבון שלך בחנות האפליקציות (לדוגמה: הגדרות > [שמך] > מינויים ב-iOS, או דרך אפליקציית Google Play > תשלומים ומינויים > מינויים ב-Android). ביטול המנוי ייכנס לתוקף בתום תקופת החיוב הנוכחית שכבר שולמה. לא יינתן החזר כספי עבור התקופה שנותרה.</p>
+            </div>
+
+            <h2>קניין רוחני וזכויות יוצרים</h2>
+            
+            <h3>בעלות בתוכן</h3>
+            <p>כל זכויות הקניין הרוחני באפליקציה, לרבות קוד, עיצוב, גרפיקה, טקסטים, שאלות, תשובות, הסברים, מאגרי מידע וכל חומר ותוכן אחר הכלול באפליקציה (להלן: "התוכן"), הינן בבעלותי הבלעדית של המפתח. חל איסור מוחלט להעתיק, לשכפל, להפיץ, לשדר, להציג בפומבי, לשנות, ליצור יצירות נגזרות או לעשות כל שימוש מסחרי בתוכן ללא קבלת אישור מפורש, מראש ובכתב מאת המפתח.</p>
+
+            <h3>שימוש אישי</h3>
+            <p>הרישיון הניתן לך לשימוש באפליקציה הוא אישי, מוגבל, בלתי-ניתן להעברה, ונועד לצורך שימוש פרטי ולא מסחרי בלבד.</p>
+
+            <h2>הגבלת אחריות, ויתור על תביעות ושיפוי</h2>
+            
+            <div class="warning-box">
+                <h3>שימוש באפליקציה "כפי שהיא" ("As Is") ו"כפי שזמינה" ("As Available")</h3>
+                <p>האפליקציה ותכניה מסופקים לך לשימוש כמות שהם, ללא כל התחייבות או אחריות מכל סוג. המפתח מסיר מעצמו במפורש כל אחריות לגבי:</p>
+                
+                <p><strong>דיוק ועדכניות:</strong> דיוק, נכונות, שלמות או עדכניות של כל מידע, שאלה, תשובה או הסבר המופיעים באפליקציה. ייתכנו אי-דיוקים, טעויות או שהמידע אינו משקף את הדין העדכני ביותר.</p>
+                
+                <p><strong>התאמה למטרה מסוימת:</strong> אין כל התחייבות שהאפליקציה או תכניה יבטיחו הצלחה במבחני לשכת עורכי הדין או בכל מבחן אחר. הצלחתך תלויה בגורמים רבים שאינם בשליטת המפתח, לרבות מאמץ אישי ויכולות אישיות.</p>
+                
+                <p><strong>זמינות ורציפות:</strong> אין התחייבות שהאפליקציה תפעל באופן רציף וללא תקלות.</p>
+            </div>
+
+            <h3>אי מתן ייעוץ משפטי</h3>
+            <p>מודגש ומובהר בזאת כי התוכן באפליקציה, לרבות שאלות, תשובות, הסברים וכל חומר לימודי אחר, ניתן למטרות לימוד ותרגול בלבד. התוכן אינו מהווה ייעוץ משפטי, חוות דעת משפטית או תחליף לייעוץ משפטי מקצועי. אין להסתמך על המידע המופיע באפליקציה לצורך קבלת החלטות משפטיות או ביצוע פעולות כלשהן במציאות. המפתח מסיר במפורש כל אחריות לכל נזק, ישיר או עקיף, שייגרם כתוצאה מהסתמכות על מידע זה.</p>
+
+            <h3>הגבלת אחריות כוללת</h3>
+            <p>במידה המרבית המותרת על פי דין, המפתח לא יישא בכל אחריות כלפיך או כלפי כל צד שלישי, בגין כל נזק, הפסד או אובדן, מכל סוג שהוא (לרבות נזקים ישירים, עקיפים, תוצאתיים, אובדן נתונים ועוגמת נפש) הנובעים מהשימוש או מאי-היכולת להשתמש באפליקציה.</p>
+
+            <h3>שיפוי</h3>
+            <p>את/ה מתחייב/ת לשפות ולפצות את המפתח בגין כל נזק, הפסד או הוצאה שייגרמו לו עקב הפרת תנאים אלה על ידך.</p>
+
+            <h2>פרטיות</h2>
+            <p>מדיניות הפרטיות של האפליקציה מפורטת במסמך נפרד. השימוש באפליקציה כפוף גם להסכמתך למדיניות הפרטיות.</p>
+
+            <h2>שימוש אסור</h2>
+            <p>חל איסור מוחלט לבצע או לנסות לבצע כל אחת מהפעולות הבאות: ביצוע הנדסה חוזרת (Reverse Engineering) של קוד האפליקציה, עקיפת מנגנוני הגנה או תשלום, שימוש באמצעים אוטומטיים לגישה לאפליקציה, או כל שימוש אחר הנוגד את תנאים אלה או את הוראות כל דין.</p>
+
+            <h2>שינויים והפסקת שירות</h2>
+            <p>אני שומר לעצמי את הזכות לעדכן, לשנות, להשעות או להפסיק לחלוטין את פעולת האפליקציה או תכונותיה, בכל עת, לפי שיקול דעתי הבלעדי.</p>
+
+            <h2>דין וסמכות שיפוט</h2>
+            <p>על תנאים אלה יחולו אך ורק דיני מדינת ישראל. סמכות השיפוט הבלעדית בכל מחלוקת הנובעת מתנאים אלה תהיה נתונה לבתי המשפט המוסמכים במחוז תל אביב-יפו, ישראל.</p>
+
+            <h2>שונות</h2>
+            
+            <h3>הסכם ממצה</h3>
+            <p>תנאים אלה מהווים את ההסכם המלא והממצה בינך לבין המפתח בכל הנוגע לשימוש באפליקציה.</p>
+
+            <div class="contact-section">
+                <h2>יצירת קשר</h2>
+                <p>לשאלות, הבהרות או דיווח על בעיות, ניתן לפנות אל המפתח דרך אפשרות "צור קשר" באפליקציה או באמצעות כתובת הדואר האלקטרוני:</p>
+                <a href="mailto:applaw12@gmail.com" class="email-link">applaw12@gmail.com</a>
+                <br><br>
+                <a href="#" class="back-to-app" onclick="window.close(); return false;">חזרה לאפליקציה</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>© כל הזכויות שמורות - אפליקציית בחינת הלשכה</strong></p>
+            <p>מסמך זה מהווה הסכם משפטי מחייב בינך לבין מפתח האפליקציה. אי הסכמתך לתנאים אלה, כולם או מקצתם, שוללת ממך את הזכות להשתמש באפליקציה.</p>
+            <p style="margin-top: 15px; font-style: italic;">תודה שבחרת להשתמש באפליקציית "בחינת הלשכה" 2025</p>
+        </div>
+    </div>
+</body>
+</html>
